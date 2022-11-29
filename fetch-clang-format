@@ -1,0 +1,9 @@
+#!/bin/sh
+
+LINUX_SOURCE_REVISION="v6.0.10"
+
+if [ -e .clang-format ]; then
+	mv -f .clang-format .clang-format.orig
+fi
+
+curl -L -o .clang-format "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/.clang-format?h=$LINUX_SOURCE_REVISION"

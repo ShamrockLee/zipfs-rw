@@ -1,6 +1,12 @@
 # -*- mode: gitignore; -*-
 
 
+## Custom
+
+# Fetch the .clang-format from the Linux Kernel,
+# which is licensed under GNU GPL
+.clang-format
+
 ## Backup
 
 /home/shamrock/Projects/github/gitignore/Global/Backup.gitignore
