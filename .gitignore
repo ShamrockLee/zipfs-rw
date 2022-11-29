@@ -124,10 +124,26 @@ flycheck_*.el
 /network-security.data
 
 
-## Ninja
+## Meson
+# Taken from https://github.com/github/gitignore/pull/3395/files
 
+# Meson Directories
+meson-logs
+meson-private
+
+# Meson Files
+meson_benchmark_setup.dat
+meson_test_setup.dat
+sanitycheckcpp.cc
+sanitycheckcpp.exe
+
+# Ninja
+build.ninja
 .ninja_deps
-.ninja_log
+.ninja_logs
+
+# Misc
+compile_commands.json
 
 
 ## Nix
