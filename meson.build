@@ -22,6 +22,7 @@ if dep_libfuse3.found()
   cfg_h.set('FUSE_USE_VERSION', 30)
 else
   dep_libfuse = dep_libfuse2
+  cfg_h.set('FUSE_USE_VERSION', 25)
 endif
 
 cfg_h.set('USE_FUSE3', use_fuse3)
