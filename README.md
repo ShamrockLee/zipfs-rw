@@ -45,7 +45,7 @@ All the dependencies will be automatically prepared during build.
 Build as
 
 ```sh
-nix flake build
+nix build .?submodules=1
 ```
 
 ## Development
