@@ -10,6 +10,8 @@ project('zipfs-rw', 'c',
 
 cfg_h = configuration_data()
 
+cfg_h.set('VERSION', meson.project_version())
+
 dep_libzip = dependency('libzip')
 dep_libfuse2 = dependency('fuse', version: '<3.0.0', required: false)
 dep_libfuse3 = dependency('fuse3', version: '>=3.0.0', required: false)
@@ -33,6 +35,7 @@ inc_config = include_directories('.')
 inc_optparse = include_directories('optparse')
 
 subdirs = [
+  'include',
   'src',
   'test',
 ]

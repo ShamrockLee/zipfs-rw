@@ -1,5 +1,7 @@
 #include <config.h>
 
+#include <stringify.h>
+
 #include <fuse.h>
 #include <zip.h>
 
@@ -14,6 +16,7 @@ int main(int argc, char *argv[])
 	(void)argc;
 	struct optparse_long longopts[] = {
 		{ "help", 'h', OPTPARSE_NONE },
+		{ "version", 'V', OPTPARSE_NONE },
 		{ NULL },
 	};
 
@@ -25,6 +28,7 @@ int main(int argc, char *argv[])
 		"\n"
 		"Options:\n"
 		" -h, --help              Display this help message and exit.\n"
+		" -V, --version           Display the version and exit.\n"
 		"\n"
 		"For more details, see zipfs-rw(8)\n";
 
@@ -37,9 +41,13 @@ int main(int argc, char *argv[])
 		case 'h':
 			fputs(str_help, stderr);
 			break;
+		case 'V':
+			fputs(stringify_expanded(VERSION) "\n", stderr);
+			break;
 		case '?':
 			fprintf(stderr, "%s: %s\n", argv[0], options.errmsg);
 			exit(EXIT_FAILURE);
+			break;
 		}
 	}
 
