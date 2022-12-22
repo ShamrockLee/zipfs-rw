@@ -30,6 +30,8 @@ cfg_h.set('USE_FUSE3', use_fuse3)
 configure_file(output: 'config.h', configuration: cfg_h)
 inc_config = include_directories('.')
 
+inc_optparse = include_directories('optparse')
+
 subdirs = [
   'test',
 ]
