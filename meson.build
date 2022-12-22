@@ -33,6 +33,7 @@ inc_config = include_directories('.')
 inc_optparse = include_directories('optparse')
 
 subdirs = [
+  'src',
   'test',
 ]
 
