@@ -3,6 +3,7 @@
 , mkShell ? pkgs.mkShell
 , zipfs-rw ? pkgs.callPackage ./. { fuse = if pkgs.stdenv.isDarwin then osxfuse else fuse3; }
 , bashInteractive ? pkgs.bashInteractive
+, clang-tools ? pkgs.clang-tools
 , fuse3 ? pkgs.fuse3
 , gitAndTools
 , muonStandalone ? pkgs.muonStandalone or null
@@ -13,6 +14,7 @@
 mkShell {
   packages = [
     bashInteractive
+    clang-tools
     gitAndTools.gitFull
     samurai
   ]
