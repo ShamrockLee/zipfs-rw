@@ -16,6 +16,7 @@
         }).overrideAttrs (oldAttrs: lib.optionalAttrs (!isRelease) {
           pname = oldAttrs.pname + "-unstable";
           version = self.lastModifiedDate;
+          src = self;
         });
       in
       {
