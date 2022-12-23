@@ -1,3 +1,24 @@
+# -*- mode: gitignore; -*-
+
+
+## Custom
+
+# Fetch the .clang-format from the Linux Kernel,
+# which is licensed under GNU GPL
+.clang-format
+
+## Backup
+
+/home/shamrock/Projects/github/gitignore/Global/Backup.gitignore
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+
+## C
+
 # Prerequisites
 *.d
 
@@ -50,3 +71,122 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+## Emacs
+
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+
+# directory configuration
+.dir-locals.el
+
+# network security
+/network-security.data
+
+
+## Meson
+# Taken from https://github.com/github/gitignore/pull/3395/files
+
+# Meson Directories
+meson-logs
+meson-private
+
+# Meson Files
+meson_benchmark_setup.dat
+meson_test_setup.dat
+sanitycheckcpp.cc
+sanitycheckcpp.exe
+
+# Ninja
+build.ninja
+.ninja_deps
+.ninja_logs
+
+# Misc
+compile_commands.json
+
+
+## Nix
+
+# Ignore build outputs from performing a nix-build or `nix build` command
+result
+result-*
+
+
+## Vim
+
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+
+## Visual Studio Code
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
