@@ -14,6 +14,10 @@ The following dependencies needs to be setup before building with Meson.
     *   Meson or Muon
     *   Ninja, Samurai, or other Meson backends
     *   Pkg-Config
+*   Test dependencies
+    *   ShellCheck
+    *   InfoZip Unzip (the `unzip` command)
+    *   InfoZip Zip (the `zip` command)
 *   Run-time dependencies
     *   [libfuse](https://github.com/libfuse/libfuse)
     *   [libzip](https://github.com/nih-at/libzip)
@@ -99,3 +103,14 @@ meson test <test-id> [<test-id2> <test-id3>]
 The test cases inside `tests/libfuse-examples` and `tests/libzip-examples` are not about the project source itself, but the libraries (`libfuse` and `libzip`).
 The original purpose of these test cases are to get ourselves familiar with the libraries when developing this project.
 We keep it here in the hope to provide a quick impression about how these libraries can be called.
+
+The sample ZIP archives can be generated at `build.tmp/test/samples/sample-<name>.zip` with
+
+```sh
+meson compile sample-<name>
+```
+
+Here is the list of available samples:
+*   sample-hello: It contains text files and directories
+*   sample-special: It is made by having `zip` read from a FIFO file.
+*   sample-symlinks: It contains a bunch of symbolic links

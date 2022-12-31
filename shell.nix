@@ -9,6 +9,9 @@
 , muonStandalone ? pkgs.muonStandalone or null
 , osxfuse ? pkgs.osxfuse
 , samurai ? pkgs.samurai
+, shellcheck ? pkgs.shellcheck
+, unzip ? pkgs.unzip
+, zip ? pkgs.zip
 }:
 
 mkShell {
@@ -17,6 +20,9 @@ mkShell {
     clang-tools
     gitAndTools.gitFull
     samurai
+    shellcheck
+    unzip
+    zip
   ]
   ++ lib.optional (! isNull muonStandalone && ! muonStandalone.meta.broken) muonStandalone
   ;

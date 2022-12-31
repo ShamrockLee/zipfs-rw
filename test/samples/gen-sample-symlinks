@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# shellcheck disable=SC3043 # Use the local keyword since it's everywhere.
+
+# shellcheck source-path=SCRIPTDIR
+. "$(dirname "$0")/prepare_sample_common.sh"
+
+cd "$WORKDIR"
+mkdir foodir
+echo "This is foo" > foodir/foo
+mkdir bardir
+echo "This is bar" > bardir/bar
+ln -s -T "foodir" foodir_link_1
+ln -s -T "foodir/foo" foo_link_1
+ln -s -T "foodir/bar_link_1" bar_link_1_link_1
+ln -s -T "/__aaaa__nonexistence" dangling_link_absolute
+ln -s -T "foo" foodir/foo_link_2
+ln -s -T "../bardir/bar" foodir/bar_link_1
+ln -s -T ".." foodir/prevdir_link
+ln -s -T "." foodir/thisdir_link
+ln -s -T "../__aaaa__nonexistence" foodir/dangling_link_relative
+zip -r --symlinks "$OUTPUT" -- *

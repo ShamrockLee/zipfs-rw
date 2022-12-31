@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# shellcheck disable=SC3043 # Use the local keyword since it's everywhere.
+
+# shellcheck source-path=SCRIPTDIR
+. "$(dirname "$0")/prepare_sample_common.sh"
+
+cd "$WORKDIR"
+touch empty
+mkdir foodir
+mkdir foodir/emptydir
+printf "Hello world!\n" > foodir/hello_lf.txt
+printf "Hello world!" > foodir/hello_notail.txt
+printf "Hello world!\r\n" > foodir/hello_crlf.txt
+for i in $(seq 0 99); do
+	printf "Hello world %d!\n" "$i" > foodir/hello_lf_100.txt
+done
+cp foodir/hello_lf_100.txt foodir/.hello_lf_100.txt
+zip -r "$OUTPUT" -- *
