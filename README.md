@@ -15,6 +15,8 @@ The following dependencies needs to be setup before building with Meson.
     *   Ninja, Samurai, or other Meson backends
     *   Pkg-Config
 *   Test dependencies
+    *   Bash
+    *   FindUtils (for the `find` command)
     *   ShellCheck
     *   InfoZip Unzip (the `unzip` command)
     *   InfoZip Zip (the `zip` command)
