@@ -41,31 +41,30 @@ int main(int argc, char *argv[]) {
 
   archive = zip_open(archive_name, ZIP_CHECKCONS, &err);
   if (archive == NULL) {
-    printf("error!\n");
+    printf("error: Fail to open archive %s\n", archive);
     exit(1);
-  } else {
-    char *path_slash = add_slash(fname + 1);
-
-    if (strcmp(fname, "\0") == 0){
-      // root
-      printf("root\n");
-      stat(archive_name, &stat_buff);
-      show_stat_zip(&stat_buff);
-    } else if (zip_name_locate(archive, path_slash, 0) != -1) {
-      // is dir
-      zip_stat(archive, path_slash, 0, &file_stat);
-      printf("is dir\n");
-      show_stat_file(&file_stat);
-
-    } else if (zip_name_locate(archive, fname + 1, 0) != -1) {
-      // is file
-      zip_stat(archive, fname + 1, 0, &file_stat);
-      printf("is file\n");
-      show_stat_file(&file_stat);
-    } else {
-      printf("no such file\n");
-      return 1;
-    }
   }
+  char *path_slash = add_slash(fname + 1);
+  if (strcmp(fname, "\0") == 0) {
+    // root
+    printf("root\n");
+    stat(archive_name, &stat_buff);
+    show_stat_zip(&stat_buff);
+  } else if (zip_name_locate(archive, path_slash, 0) != -1) {
+    // is dir
+    zip_stat(archive, path_slash, 0, &file_stat);
+    printf("is dir\n");
+    show_stat_file(&file_stat);
+
+  } else if (zip_name_locate(archive, fname + 1, 0) != -1) {
+    // is file
+    zip_stat(archive, fname + 1, 0, &file_stat);
+    printf("is file\n");
+    show_stat_file(&file_stat);
+  } else {
+    printf("no such file\n");
+    return 1;
+  }
+  
   zip_close(archive);
 }
