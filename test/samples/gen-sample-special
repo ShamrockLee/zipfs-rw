@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# shellcheck disable=SC3043 # Use the local keyword since it's everywhere.
+
+# shellcheck source-path=SCRIPTDIR
+. "$(dirname "$0")/prepare_sample_common.sh"
+
+cd "$WORKDIR"
+mkfifo myfifo
+type zip
+zip --fifo -r --symlinks "$OUTPUT" -- * &
+cat <<EOF >> myfifo
+Hello world!
+EOF
+wait
+unlink myfifo
