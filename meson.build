@@ -29,6 +29,45 @@ endif
 
 cfg_h.set('USE_FUSE3', use_fuse3)
 
+dep_libtree_fetched = dependency('libtree', required: false)
+
+exe_gnu_make = find_program('make', required: false)
+
+is_builtin_libtree = not dep_libtree_fetched.found()
+
+dep_libtree = dep_libtree_fetched
+
+if is_builtin_libtree
+  builtin_libtree = custom_target('builtin-libtree',
+    output: [
+      'libtree.a',
+      'libtree.so',
+      'libtree.pc',
+    ],
+    input: files('libtree/Makefile'),
+    command: [
+      exe_gnu_make,
+      '-C',
+      'libtree',
+    ],
+  )
+  dep_libtree_builtin = declare_dependency(
+    compile_args: [
+      '-g',
+      '-Os',
+      '-std=c99',
+      '-Wall',
+      '-Werror',
+      '-Wno-unused-function',
+      '-fpic',
+    ],
+    include_directories: [
+      include_directories('libtree'),
+    ],
+  )
+  dep_libtree = dep_libtree_builtin
+endif
+
 configure_file(output: 'config.h', configuration: cfg_h)
 inc_config = include_directories('.')
 

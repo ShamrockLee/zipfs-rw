@@ -1,8 +1,10 @@
 {
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+  inputs.libtree-source.url = "github:fbuihuu/libtree";
+  inputs.libtree-source.flake = false;
 
-  outputs = { self, flake-utils, nixpkgs, ... }:
+  outputs = { self, flake-utils, nixpkgs, libtree-source, ... }:
     let
       isRelease = false;
     in
@@ -10,6 +12,11 @@
       let
         lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.${system};
+        libtreeBulitin = pkgs.callPackage ./libtree.nix { };
+        libtree = libtreeBulitin.overrideAttrs (oldAttrs: {
+          version = libtree-source.lastModifiedDate;
+          src = libtree-source;
+        });
         zipfs-rw = (pkgs.callPackage ./. {
           fuse = if pkgs.stdenv.isDarwin then pkgs.osxfuse else pkgs.fuse3;
           self = zipfs-rw;
@@ -22,7 +29,11 @@
       {
         packages = {
           default = zipfs-rw;
-          inherit zipfs-rw;
+          inherit
+            libtree
+            libtreeBulitin
+            zipfs-rw
+            ;
         };
         devShells.default = pkgs.callPackage ./shell.nix { inherit zipfs-rw; };
         devShells.fuse2 = pkgs.callPackage ./shell.nix { zipfs-rw = zipfs-rw.override { inherit (pkgs) fuse; }; };

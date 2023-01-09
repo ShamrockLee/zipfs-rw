@@ -6,4 +6,5 @@ args: files('prepare_workdir.sh'),
 
 subdir('samples')
 subdir('libfuse_examples')
+subdir('libtree_examples')
 subdir('libzip_examples')
