@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -x -eu -o pipefail
+
+# shellcheck source-path=SCRIPTDIR
+source "$(dirname "$0")/../prepare_workdir.sh"
+
+# Check the number of input arguments
+if (( "$#" < 1 )); then
+	echo "Expect ZIP_CAT_PATH or ZIP_CAT_PATH SAMPLE_PATH" >&1
+	exit 1
+fi
+
+ZIP_CAT_PATH="$1"
+
+if (( "$#" >= 2 )); then
+	SAMPLE="$2"
+else
+	SAMPLE="$(dirname "$0")/../samples/sample_hello.zip"
+fi
+[[ -f "$SAMPLE" ]] || [[ -L "$SAMPLE" ]] # Assert the sample ZIP file exists
+
+SAMPLE="$(realpath "$SAMPLE")"
+[[ -f "$SAMPLE" ]] || [[ -L "$SAMPLE" ]] # Assert the sample ZIP file exists after path resolution
+
+pushd "$WORKDIR"
+unzip "$SAMPLE"
+popd
+
+# Check if the content of all the regular files being `zip-cat`ed
+# is the same as the original ones before archiving.
+while ISF="" read -r -d $'\0' FILE; do
+    # Remove "${WORKDIR}/" prefix from the string "$FILE"
+    # to get the sub-directory of the file inside the archive
+	SUBDIR="${FILE:${#WORKDIR}+1}"
+    # Compare the content read with the source file
+	diff <("$ZIP_CAT_PATH" "$SAMPLE" "$SUBDIR") "$FILE"
+done < <(find "$WORKDIR" -mindepth 1 -type f -print0)
