@@ -6,17 +6,13 @@
 , pkg-config
 , fuse
 , fuse3
-, libtree ? null
+, libtree-c ? callPackage ./libtree-c.nix { }
 , libzip
 , osxfuse
 , shellcheck
-, useMesonBuiltinLibtree ? false
 , self ? callPackage ./. { fuse = if stdenv.hostPlatform.isDarwin then osxfuse else fuse3; }
 }:
 
-let
-  libtreeBulitin = callPackage ./libtree.nix { };
-in
 stdenv.mkDerivation {
   pname = "zipfs-rw";
   version = "0.1.0";
@@ -34,11 +30,11 @@ stdenv.mkDerivation {
           fuse = fuse3;
           self = self.passthru.tests.zipfs-rw-fuse3;
         };
-        zipfs-rw-nix-builtin-libtree = self.override {
-          libtree = null;
+        zipfs-rw-nix-builtin-libtree-c = self.override {
+          libtree-c = callPackage ./libtree-c.nix { };
         };
-        zipfs-rw-meson-builtin-libtree = self.override {
-          useMesonBuiltinLibtree = true;
+        zipfs-rw-meson-builtin-libtree-c = self.override {
+          libtree-c = null;
         };
       }
     // lib.optionalAttrs stdenv.hostPlatform.isDarwin
@@ -58,10 +54,9 @@ stdenv.mkDerivation {
 
   buildInputs = [
     fuse
+    libtree-c
     libzip
   ]
-  ++ lib.optional (!useMesonBuiltinLibtree)
-    (if isNull libtree then libtreeBulitin else libtree)
   ;
 
   doCheck = true;

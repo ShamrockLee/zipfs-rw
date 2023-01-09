@@ -12,7 +12,7 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "A library which implements a couple of famous binary search trees";
+    description = "A C library implementing famous binary search trees in Linux-kernel style";
     homepage = "https://github.com/fbuihuu/libtree";
     license = licenses.lgpl21Only;
     platforms = platforms.all;

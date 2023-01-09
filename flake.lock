@@ -15,7 +15,7 @@
         "type": "github"
       }
     },
-    "libtree-source": {
+    "libtree-c-source": {
       "flake": false,
       "locked": {
         "lastModified": 1413485735,
@@ -50,7 +50,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "libtree-source": "libtree-source",
+        "libtree-c-source": "libtree-c-source",
         "nixpkgs": "nixpkgs"
       }
     }
