@@ -15,6 +15,22 @@
         "type": "github"
       }
     },
+    "libtree-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1413485735,
+        "narHash": "sha256-K4bHi+6dlka9ph49KQ/oSILWtLbT/jnNdB7lGgFcNGg=",
+        "owner": "fbuihuu",
+        "repo": "libtree",
+        "rev": "8532e24b3e2774cf0ad312bef539e116a49ddd0d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fbuihuu",
+        "repo": "libtree",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1669558522,
@@ -34,6 +50,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "libtree-source": "libtree-source",
         "nixpkgs": "nixpkgs"
       }
     }
