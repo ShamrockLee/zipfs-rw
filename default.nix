@@ -8,6 +8,7 @@
 , fuse3
 , libzip
 , osxfuse
+, shellcheck
 , self ? callPackage ./. { fuse = if stdenv.hostPlatform.isDarwin then osxfuse else fuse3; }
 }:
 
@@ -47,5 +48,11 @@ stdenv.mkDerivation {
   buildInputs = [
     fuse
     libzip
+  ];
+
+  doCheck = true;
+
+  checkInputs = [
+    shellcheck
   ];
 }
