@@ -25,7 +25,6 @@ int main(int argc, char *argv[]) {
   char *full_path = argv[argc - 1];
   char buf[50] = {0};
   char *delim = "/";
-  // char *name[50];
   char *fname = NULL;
   char *archive_name = NULL;
   zip_t *archive = NULL;
