@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	zip_stat_t file_stat;
 	zip_stat_init(&file_stat);
 	struct stat stat_buff;
-	int err = 0, count = 0;
+	int err = 0;
 
 	strcpy(buf, full_path);
 	archive_name = strtok(buf, delim);
