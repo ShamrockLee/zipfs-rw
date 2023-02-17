@@ -41,15 +41,14 @@ int main(int argc, char *argv[])
 
 	strcpy(buf, full_path);
 	archive_name = strtok(buf, delim);
-	long lenth = strlen(archive_name);
-	fname = full_path + lenth;
+	fname = full_path + (strlen(archive_name) + 1);
 
 	archive = zip_open(archive_name, ZIP_CHECKCONS, &err);
 	if (archive == NULL) {
 		printf("error: Fail to open archive %s\n", archive_name);
 		exit(1);
 	}
-	char *path_slash = add_slash(fname + 1);
+	char *path_slash = add_slash(fname);
 	if (strcmp(fname, "\0") == 0) {
 		// root
 		printf("root\n");
@@ -60,9 +59,9 @@ int main(int argc, char *argv[])
 		zip_stat(archive, path_slash, 0, &file_stat);
 		printf("is dir\n");
 		show_stat_file(&file_stat);
-	} else if (zip_name_locate(archive, fname + 1, 0) != -1) {
+	} else if (zip_name_locate(archive, fname, 0) != -1) {
 		// is file
-		zip_stat(archive, fname + 1, 0, &file_stat);
+		zip_stat(archive, fname, 0, &file_stat);
 		printf("is file\n");
 		show_stat_file(&file_stat);
 	} else {
