@@ -11,8 +11,10 @@
 // Stringify the expanded result of the macro
 #define stringify_expanded(x) stringify(x)
 
-#ifndef container_of(p_container, type_container,    \
-		     name_member)(type_container *)( \
-	((char *)(p_container)) - offsetof(type_container, name_member))
+#ifndef container_of
+#define container_of(p_node, type_container, name_member) \
+	(type_container *)(((char *)(p_node)) -           \
+			   offsetof(type_container, name_member))
+#endif /* container_of */
 
 #endif /* __ZIPFS__MACRO_UTILS_H__ */
