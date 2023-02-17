@@ -14,4 +14,7 @@ exe_libzip_example_stat = executable(
     'zip-stat',
     ['zip_stat.c'],
     dependencies: deps_libzip_example,
+    c_args: [
+        '-Wno-stringop-truncation',
+    ],
 )
