@@ -13,8 +13,8 @@
 
 #ifndef container_of
 #define container_of(p_node, type_container, name_member) \
-	(type_container *)(((char *)(p_node)) -           \
-			   offsetof(type_container, name_member))
+	((type_container *)(((char *)(p_node)) -          \
+			    offsetof(type_container, name_member)))
 #endif /* container_of */
 
 #endif /* __ZIPFS__MACRO_UTILS_H__ */
