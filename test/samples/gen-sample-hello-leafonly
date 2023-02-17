@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# shellcheck source-path=SCRIPTDIR
+. "$(dirname "$0")/prepare_sample_common.sh"
+
+cd "$WORKDIR"
+
+declare -a inputFiles=()
+
+touch empty
+inputFiles+=( empty )
+mkdir foodir
+mkdir foodir/emptydir
+inputFiles+=( foodir/emptydir )
+printf "Hello world!\n" > foodir/hello_lf.txt
+inputFiles+=( foodir/hello_lf.txt )
+printf "Hello world!" > foodir/hello_notail.txt
+inputFiles+=( foodir/hello_notail.txt )
+printf "Hello world!\r\n" > foodir/hello_crlf.txt
+inputFiles+=( foodir/hello_crlf.txt )
+for i in $(seq 0 99); do
+	printf "Hello world %d!\n" "$i" > foodir/hello_lf_100.txt
+inputFiles+=( foodir/hello_lf_100.txt )
+done
+cp foodir/hello_lf_100.txt foodir/.hello_lf_100.txt
+zip  "$OUTPUT" -- "${inputFiles[@]}"
