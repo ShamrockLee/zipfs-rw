@@ -9,7 +9,7 @@ char *add_slash(char *path)
 {
 	long int lenth = strlen(path);
 	char *path_add_slash = malloc(sizeof(char) * (lenth + 2));
-	strncpy(path_add_slash, path, lenth - 1);
+	strncpy(path_add_slash, path, lenth);
 	path_add_slash[lenth] = '/';
 	path_add_slash[lenth + 1] = '\0';
 	return path_add_slash;
