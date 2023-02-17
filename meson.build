@@ -10,6 +10,13 @@ project(
     ],
 )
 
+add_project_arguments(
+    [
+        '-Werror',
+    ],
+    language: 'c',
+)
+
 cfg_h = configuration_data()
 
 cfg_h.set('VERSION', meson.project_version())
