@@ -1,6 +1,6 @@
 #include <config.h>
 
-#include <stringify.h>
+#include <macro_utils.h>
 
 #include <fuse.h>
 #include <zip.h>

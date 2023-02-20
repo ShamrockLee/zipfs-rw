@@ -1,8 +1,9 @@
 {
     "C_Cpp.default.includePath": [
-        "${default}",
+        "${workspaceFolder}/include",
         "${workspaceFolder}/libtree",
-        "${workspaceFolder}/optparse"
+        "${workspaceFolder}/optparse",
+        "${default}"
     ],
     "files.associations": {
         "*.h": "c"
